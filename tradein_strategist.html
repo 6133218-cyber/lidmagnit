@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trade-In Недвижимость: Москва → Мир за 30 дней</title>
+  <style>
+    :root {
+      --bg-dark: #0a0f1d;
+      --card-bg: #12192c;
+      --card-sub: #1a233d;
+      --accent-gold: #eab308;
+      --accent-gold-hover: #ca8a04;
+      --accent-blue: #38bdf8;
+      --accent-emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --font-stack: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-stack);
+      line-height: 1.5;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Header */
+    header {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-premium {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(202, 138, 4, 0.1));
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    /* Nav Tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+      background: var(--card-sub);
+    }
+
+    .tab-btn.active {
+      color: #0b0f19;
+      background: var(--accent-gold);
+    }
+
+    /* Tab Content */
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Layout Grid */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 850px) {
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    select, input[type="range"] {
+      width: 100%;
+    }
+
+    select {
+      background: var(--card-sub);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    select:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .range-val-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .range-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      height: 6px;
+      background: #243050;
+      border-radius: 3px;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--card-sub);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      margin-top: 8px;
+    }
+
+    .checkbox-group input {
+      accent-color: var(--accent-gold);
+      width: 16px;
+      height: 16px;
+    }
+
+    .checkbox-group span {
+      font-size: 13px;
+      color: #e2e8f0;
+    }
+
+    /* Result Cards */
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .metric-box {
+      background: var(--card-sub);
+      border: 1px solid var(--border-color);
+      padding: 14px;
+      border-radius: 12px;
+    }
+
+    .metric-box .label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .metric-box .val {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .metric-box .sub {
+      font-size: 11px;
+      color: var(--accent-emerald);
+      margin-top: 2px;
+    }
+
+    /* Visual Swap Bar */
+    .swap-progress-wrapper {
+      margin: 20px 0;
+    }
+
+    .progress-bar-container {
+      height: 12px;
+      background: #243050;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .bar-re {
+      background: var(--accent-gold);
+      transition: width 0.3s ease;
+    }
+
+    .bar-biz {
+      background: var(--accent-blue);
+      transition: width 0.3s ease;
+    }
+
+    .bar-reserve {
+      background: var(--accent-emerald);
+      transition: width 0.3s ease;
+    }
+
+    .bar-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Timeline Stepper */
+    .timeline {
+      border-left: 2px solid #243050;
+      margin-left: 10px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .timeline-step {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .timeline-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-step::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      box-shadow: 0 0 8px rgba(234, 179, 8, 0.6);
+    }
+
+    .step-days {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .step-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Chat Simulator */
+    .chat-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 600px;
+    }
+
+    .chat-header {
+      background: var(--card-sub);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .chat-bot-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar-bot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #eab308, #3b82f6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .msg {
+      max-width: 82%;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .msg-bot {
+      background: var(--card-sub);
+      color: #e2e8f0;
+      align-self: flex-start;
+      border-bottom-left-radius: 2px;
+      border: 1px solid var(--border-color);
+    }
+
+    .msg-user {
+      background: #1e3a8a;
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 2px;
+    }
+
+    .chat-options {
+      padding: 12px 16px;
+      background: rgba(18, 25, 44, 0.95);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .quick-btn {
+      background: var(--card-sub);
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quick-btn:hover {
+      background: var(--accent-gold);
+      color: #000;
+    }
+
+    .reset-chat-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .reset-chat-btn:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    /* Prompt & Docs Tab */
+    .code-block {
+      background: #060913;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12.5px;
+      color: #e2e8f0;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      line-height: 1.5;
+      max-height: 520px;
+      overflow-y: auto;
+    }
+
+    .copy-btn {
+      background: var(--accent-gold);
+      color: #0b0f19;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      float: right;
+      margin-bottom: 8px;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-gold-hover);
+    }
+
+    .tag-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .spec-card {
+      background: var(--card-sub);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .spec-card h3 {
+      font-size: 15px;
+      color: var(--accent-blue);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .spec-card ul {
+      list-style-type: none;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .spec-card li {
+      margin-bottom: 6px;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .spec-card li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent-gold);
+    }
+
+    .alert-box {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 4px solid var(--accent-blue);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: #bae6fd;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="badge-premium">Trade-In 30 Дней</span>
+            <span style="font-size: 12px; color: var(--accent-emerald);">● Конкурсный Метод</span>
+          </div>
+          <h1>Международный Trade-In Недвижимости</h1>
+          <p class="subtitle">Москва & МО → Зарубежье: продажа на пике спроса + активы, ВНЖ и регистрация компаний</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-btn-calc">1. Интерактивный Калькулятор Свопа</button>
+      <button class="tab-btn" id="tab-btn-sim">2. Симулятор ИИ-Диалога (Telegram)</button>
+      <button class="tab-btn" id="tab-btn-prompt">3. Системный Промпт для ИИ-Бота</button>
+      <button class="tab-btn" id="tab-btn-arch">4. ТЗ и Архитектура Интеграции</button>
+    </div>
+
+    <!-- PANE 1: CALCULATOR -->
+    <div class="tab-pane active" id="pane-calc">
+      <div class="calc-grid">
+        <!-- Controls Column -->
+        <div class="card">
+          <h2>1. Параметры вашего актива в Москве / МО</h2>
+          
+          <div class="form-group">
+            <label for="asset-type">Тип реализуемого объекта</label>
+            <select id="asset-type">
+              <option value="flat_biz">Квартира бизнес-класс (ЦАО, ЗАО, ЮЗАО)</option>
+              <option value="flat_prem">Элитная недвижимость (Хамовники, Раменки, Остоженка)</option>
+              <option value="comm_retail">Street-retail / Коммерческое помещение</option>
+              <option value="suburban">Загородная резиденция (Новая Рига, Рублевка)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <div class="range-val-wrapper">
+              <label for="asset-val-range">Ориентир стоимости в РФ</label>
+              <span class="range-value" id="asset-val-text">45 млн ₽</span>
+            </div>
+            <input type="range" id="asset-val-range" min="20" max="250" step="5" value="45">
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); margin-top:4px;">
+              <span>20 млн ₽</span>
+              <span>100 млн ₽</span>
+              <span>250 млн ₽</span>
+            </div>
+          </div>
+
+          <h2 style="margin-top: 24px;">2. Целевая зарубежная стратегия</h2>
+
+          <div class="form-group">
+            <label for="target-country">Страна релокации капитала</label>
+            <select id="target-country">
+              <option value="uae" data-yield="8.5" data-vnz="38000" data-cur="AED / USD">ОАЭ (Дубай / Абу-Даби) — 8-9% доходность, Golden Visa</option>
+              <option value="bali" data-yield="11.5" data-vnz="25000" data-cur="USD">Индонезия (Бали) — 11-14% доходность вилл, Second Home Visa</option>
+              <option value="thai" data-yield="7.8" data-vnz="22000" data-cur="THB / USD">Таиланд (Пхукет / Бангкок) — 7-9% арендный пул, LTR Visa</option>
+              <option value="cyprus" data-yield="6.5" data-vnz="300000" data-cur="EUR">Кипр — Постоянный ПМЖ ЕС через покупку от €300k</option>
+              <option value="turkey" data-yield="6.2" data-vnz="200000" data-cur="USD">Турция (Стамбул / Анталья) — ВНЖ / Паспортная программа</option>
+              <option value="oman" data-yield="8.0" data-vnz="45000" data-cur="USD">Оман / Бахрейн — Новые растущие налоговые гавани</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Дополнительный контур «Под ключ»</label>
+            <div class="checkbox-group" id="chk-biz-group">
+              <input type="checkbox" id="chk-biz" checked>
+              <span>Регистрация зарубежной компании + корпоративный счет</span>
+            </div>
+            <div class="checkbox-group" id="chk-logistics-group">
+              <input type="checkbox" id="chk-logistics" checked>
+              <span>Юридическая логистика & escrow-безопасность перевода</span>
+            </div>
+          </div>
+
+          <div class="alert-box" style="margin-top: 14px;">
+            <strong>Конкурсный метод (30 дней):</strong> Сбор концентрированного пула из 20-30 покупателей на один уикенд. Фиксирует цену на 7–12% выше классической пассивной продажи за счет конкуренции покупателей.
+          </div>
+        </div>
+
+        <!-- Output & Strategy Column -->
+        <div class="card">
+          <h2>Итоговая модель международного свопа</h2>
+
+          <div class="metric-row">
+            <div class="metric-box">
+              <div class="label">Выручка от конкурса (USD экв.)</div>
+              <div class="val" id="res-usd-total">$489,000</div>
+              <div class="sub" id="res-auction-bonus">+10% прирост от конкурса</div>
+            </div>
+            <div class="metric-box">
+              <div class="label">Пассивный доход за рубежом</div>
+              <div class="val" id="res-annual-yield">$39,100 / год</div>
+              <div class="sub" id="res-yield-pct">8.5% net годовых в валюте</div>
+            </div>
+          </div>
+
+          <label style="font-weight: 600; color: #fff; margin-bottom: 4px;">Распределение инвестиционного пула</label>
+          <div class="swap-progress-wrapper">
+            <div class="progress-bar-container">
+              <div class="bar-re" id="bar-re" style="width: 88%;"></div>
+              <div class="bar-biz" id="bar-biz" style="width: 7%;"></div>
+              <div class="bar-reserve" id="bar-reserve" style="width: 5%;"></div>
+            </div>
+            <div class="bar-legend">
+              <div class="legend-item"><span class="legend-dot" style="background:var(--accent-gold);"></span> Недвижимость (<span id="txt-bar-re">$430,000</span>)</div>
+              <div class="legend-item"><span class="legend-dot" style="background:var(--accent-blue);"></span> Бизнес & ВНЖ (<span id="txt-bar-biz">$35,000</span>)</div>
+              <div class="legend-item"><span class="legend-dot" style="background:var(--accent-emerald);"></span> Ликвидный резерв (<span id="txt-bar-res">$24,000</span>)</div>
+            </div>
+          </div>
+
+          <h2 style="margin-top: 24px; font-size: 16px;">Таймлайн сделки: 30 дней от старта до ключей</h2>
+          <div class="timeline">
+            <div class="timeline-step">
+              <div class="step-days">Дни 1 – 10: Упаковка и запуск</div>
+              <div class="step-title">Аудит объекта в Москве и бронирование слота за рубежом</div>
+              <div class="step-desc">Профессиональный хоумстейджинг, фото/видео, маркетинг по закрытой базе покупателей. Параллельный подбор пула объектов в стране назначения.</div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-days">Дни 11 – 24: Конкурсный показ</div>
+              <div class="step-title">Концентрированные показы и аукцион оферт</div>
+              <div class="step-desc">2 дня показов, 25+ квалифицированных покупателей, закрытый сбор письменных предложений и фиксация максимальной цены.</div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-days">Дни 25 – 30: Закрытие свопа</div>
+              <div class="step-title">Задаток в РФ → Бесшовный расчет за рубежом → Старт фирмы</div>
+              <div class="step-desc">Юридическое оформление продажи в Москве, трансграничный расчет через аккредитив/escrow, подача документов на ВНЖ и регистрацию компании.</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; text-align: center;">
+            <button class="quick-btn" id="btn-to-sim" style="width: 100%; padding: 12px; font-weight: 700;">Перейти к проверке сценария в ИИ-боте →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANE 2: SIMULATOR -->
+    <div class="tab-pane" id="pane-sim">
+      <div class="chat-container">
+        <div class="chat-header">
+          <div class="chat-bot-info">
+            <div class="avatar-bot">🤖</div>
+            <div>
+              <div style="font-weight: 700; font-size: 14px;">Trade-In AI Strategist</div>
+              <div style="font-size: 11px; color: var(--accent-emerald);">● В сети | Квалификация 30 дней</div>
+            </div>
+          </div>
+          <button class="reset-chat-btn" id="btn-reset-chat">Перезапустить диалог</button>
+        </div>
+
+        <div class="chat-messages" id="chat-box">
+          <!-- Messages will be injected by JS -->
+        </div>
+
+        <div class="chat-options" id="chat-options">
+          <!-- Action buttons injected by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- PANE 3: PROMPT -->
+    <div class="tab-pane" id="pane-prompt">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h2>Готовый System Prompt для LLM-ассистента</h2>
+          <button class="copy-btn" id="copy-prompt-btn">Скопировать промпт</button>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+          Этот системный промпт вставляется в системное сообщение в Make/n8n/OpenAI Assistant. Он настраивает роль топ-брокера международного Trade-In, обучает конкурсному методу за 30 дней, строго квалифицирует бюджет и передает структурированный JSON в CRM.
+        </p>
+        <div class="code-block" id="prompt-content">ТЫ — ВЕДУЩИЙ МЕЖДУНАРОДНЫЙ ИИ-СТРАТЕГ И БРОКЕР СЕРВИСА TRADE-IN (МОСКВА/МО → МИР).
+
+ТВОЯ СПЕЦИАЛИЗАЦИЯ:
+Мы реализуем объекты недвижимости в Москве и Московской области строго КОНКУРСНЫМ (аукционным) МЕТОДОМ за 30 дней по МАКСИМАЛЬНОЙ рыночной цене.
+Одновременно мы под ключ организуем приобретение инвестиционной или релокационной недвижимости за рубежом, полное открытие юридических лиц (компаний), банковских счетов, ВНЖ и трансграничную логистику капитала.
+
+ГЛАВНЫЕ ПРИНЦИПЫ ДИАЛОГА:
+1. Тон: Дорогой, деловой, экспертный, лаконичный. Без пустых любезностей и «воды». Общайся как управляющий партнер инвестиционного бутика.
+2. Не давай абстрактных консультаций. Твоя цель — за 4 шага собрать квалификацию актива и цели, рассчитать модель свопа и передать контакт брокеру.
+3. Отработка конкурсного метода: Если клиент сомневается («почему за 30 дней? это дисконт?»), объясни:
+   «Конкурсный метод — это не срочный выкуп с дисконтом. Это концентрация 20-30 покупателей на один уикенд через масштабный целевой маркетинг. Покупатели соревнуются за объект на повышение, что дает +5...+12% к вялотекущей рыночной цене и гарантирует сделку в 30 дней».
+
+ЭТАПЫ ДИАЛОГА (СТРОГО ПО ШАГАМ):
+
+Шаг 1. Квалификация объекта в РФ:
+- Тип объекта (квартира/коммерция/дом)
+- Локация (район/шоссе) и площадь
+- Желаемая ценовая планка (ориентир)
+
+Шаг 2. Зарубежная цель:
+- Страна приоритета (ОАЭ, Бали/Индонезия, Таиланд, Кипр, Турция, Оман или открыты к выбору)
+- Главная задача: Пассивный доход в валюте (аренда/девелопмент) ИЛИ ВНЖ/второй паспорт ИЛИ перемещение бизнеса
+
+Шаг 3. Бизнес-контур и сопровождение:
+- Нужно ли открытие юридического лица под международную торговлю/логистику?
+- Нужен ли корпоративный счет и структурирование перевода?
+
+Шаг 4. Выдача тизера стратегии и захват контакта:
+- Покажи краткую математику: «При реализации вашего объекта за X млн руб ($Y), стратегия позволяет приобрести [Вариант за рубежом] с доходностью Z% net + за 14 дней оформить компанию и ВНЖ».
+- Заверши призывом: «Чтобы рассчитать точный стартовый аукционный шаг и забронировать пул зарубежных лотов до подорожания, я передаю расчет старшему партнеру. Напишите ваш номер телефона (WhatsApp/Telegram), куда направить полную презентацию свопа».
+
+АНТИ-ГАЛЛЮЦИНАЦИИ И ЗАЩИТА:
+- Никогда не обещай 100% гарантированную доходность без привязки к рынку (называй реалистичные вилки: ОАЭ 7-9%, Бали 11-14%, Таиланд 7-9%, Кипр 5-7%).
+- Не консультируй по уходу от налогов. Ссылайся на легальные соглашения об избежании двойного налогообложения и white-label логистику.
+- Если клиент пытается говорить о погоде или отвлекающих темах, вежливо возвращай: «Моя задача — рассчитать капитализацию вашего обмена за 30 дней. Давайте уточним...»
+
+ВЫХОДНОЙ ФОРМАТ ДЛЯ CRM (отправляется вебхуком при получении контакта):
+{
+  "lead_name": "Имя",
+  "phone": "Телефон",
+  "asset_rf": {"type": "...", "location": "...", "target_price_rub": "..."},
+  "target_country": "...",
+  "target_goal": "income / vnz / business",
+  "need_company_reg": true/false,
+  "estimated_usd": "...",
+  "urgency_days": 30
+}</div>
+      </div>
+    </div>
+
+    <!-- PANE 4: ARCHITECTURE & SPECS -->
+    <div class="tab-pane" id="pane-arch">
+      <div class="card">
+        <h2>Архитектура интеграции «Под ключ»</h2>
+        <div class="tag-grid">
+          <div class="spec-card">
+            <h3>1. Точка входа (Трафик)</h3>
+            <ul>
+              <li>Telegram-бот (@TradeIn_Capital_Bot)</li>
+              <li>Интерактивный виджет на лендинге</li>
+              <li>Квиз в таргетированной рекламе / TG Ads</li>
+              <li>Deep-link с UTM-меткой источника</li>
+            </ul>
+          </div>
+          <div class="spec-card">
+            <h3>2. Слой логики & LLM (Make / n8n)</h3>
+            <ul>
+              <li>Webhook ловит сообщение пользователя</li>
+              <li>Сбор истории диалога в Redis / Memory</li>
+              <li>Обращение к OpenAI API (GPT-4o / Claude 3.5 Sonnet)</li>
+              <li>Парсинг триггеров: валидация телефона и бюджета</li>
+            </ul>
+          </div>
+          <div class="spec-card">
+            <h3>3. CRM-система (AmoCRM / Bitrix24)</h3>
+            <ul>
+              <li>Создание сделки в воронке «Международный Trade-In»</li>
+              <li>Тегирование: [30_дней_конкурс], [ОАЭ], [Бизнес]</li>
+              <li>Заполнение полей: Бюджет РФ, Страна, Цель</li>
+              <li>Мгновенный авто-звонок или пуш брокеру дежурной смены</li>
+            </ul>
+          </div>
+          <div class="spec-card">
+            <h3>4. Дожим и контент-маркетинг</h3>
+            <ul>
+              <li>Отправка персонального PDF-тизера в Telegram за 30 сек</li>
+              <li>Серия кейсов: «Как продали на Пресне за 27 дней на 8% выше рынка»</li>
+              <li>Инвайт на онлайн-презентацию закрытого пула объектов</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 style="margin-top: 24px; font-size: 16px;">Матрица квалификации лида для брокера (Свойства сделки в CRM)</h2>
+        <div class="code-block" style="max-height: 250px;">
+Field Name                | Type     | Example Value                | Приоритет
+--------------------------+----------+------------------------------+-----------
+Московский актив          | String   | 3-комн. 110м², Хамовники     | Высокий
+Ожидание собственника     | Number   | 65 000 000 ₽                 | Высокий
+Готовность к конкурсу     | Enum     | Готов к старту / Сомневается | Критический
+Целевая юрисдикция        | Enum     | ОАЭ / Бали / Кипр / Турция   | Высокий
+Цель обмена               | Multi    | Инвестиции + Регистрация ООО | Средний
+Потребность в юр. схеме   | Boolean  | True (нужен счет и логистика)| Высокий
+Номер для связи           | Phone    | +7 (985) ***-**-**           | Завершение
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // State
+    const state = {
+      assetType: 'flat_biz',
+      assetValRubM: 45,
+      targetCountry: 'uae',
+      needBiz: true,
+      needLogistics: true,
+      rubUsdRate: 92.0
+    };
+
+    // Country specs
+    const countries = {
+      uae: { name: 'ОАЭ (Дубай)', yieldPct: 8.5, vnzCost: 35000, currency: 'AED / USD' },
+      bali: { name: 'Индонезия (Бали)', yieldPct: 11.5, vnzCost: 20000, currency: 'USD' },
+      thai: { name: 'Таиланд (Пхукет)', yieldPct: 7.8, vnzCost: 22000, currency: 'THB / USD' },
+      cyprus: { name: 'Кипр', yieldPct: 6.5, vnzCost: 300000, currency: 'EUR' },
+      turkey: { name: 'Турция', yieldPct: 6.2, vnzCost: 200000, currency: 'USD' },
+      oman: { name: 'Оман', yieldPct: 8.0, vnzCost: 40000, currency: 'USD' }
+    };
+
+    // DOM elements
+    const assetValRange = document.getElementById('asset-val-range');
+    const assetValText = document.getElementById('asset-val-text');
+    const targetCountrySel = document.getElementById('target-country');
+    const assetTypeSel = document.getElementById('asset-type');
+    const chkBiz = document.getElementById('chk-biz');
+    const chkLogistics = document.getElementById('chk-logistics');
+
+    const resUsdTotal = document.getElementById('res-usd-total');
+    const resAuctionBonus = document.getElementById('res-auction-bonus');
+    const resAnnualYield = document.getElementById('res-annual-yield');
+    const resYieldPct = document.getElementById('res-yield-pct');
+
+    const barRe = document.getElementById('bar-re');
+    const barBiz = document.getElementById('bar-biz');
+    const barReserve = document.getElementById('bar-reserve');
+    const txtBarRe = document.getElementById('txt-bar-re');
+    const txtBarBiz = document.getElementById('txt-bar-biz');
+    const txtBarRes = document.getElementById('txt-bar-res');
+
+    function formatUsd(num) {
+      return '$' + Math.round(num).toLocaleString('en-US');
+    }
+
+    function calculate() {
+      state.assetValRubM = parseFloat(assetValRange.value);
+      assetValText.textContent = state.assetValRubM + ' млн ₽';
+      state.targetCountry = targetCountrySel.value;
+      state.assetType = assetTypeSel.value;
+      state.needBiz = chkBiz.checked;
+      state.needLogistics = chkLogistics.checked;
+
+      // Base calculation
+      const rubVal = state.assetValRubM * 1000000;
+      // Auction bonus +8% on average over passive slow listing
+      const auctionMultiplier = 1.08;
+      const totalUsd = (rubVal * auctionMultiplier) / state.rubUsdRate;
+
+      // Distribution
+      let bizCost = 0;
+      if (state.needBiz) bizCost += 18000; // Company setup + corporate account
+      if (state.needLogistics) bizCost += 12000; // Legal structuring + escrow
+
+      const reBudget = Math.max(totalUsd * 0.85, totalUsd - bizCost - (totalUsd * 0.05));
+      const actualBizBudget = bizCost;
+      const reserveBudget = Math.max(0, totalUsd - reBudget - actualBizBudget);
+
+      // Yield
+      const cData = countries[state.targetCountry];
+      const annualIncomeUsd = reBudget * (cData.yieldPct / 100);
+
+      // DOM Update
+      resUsdTotal.textContent = formatUsd(totalUsd);
+      resAuctionBonus.textContent = '+8% (~' + formatUsd((rubVal * 0.08) / state.rubUsdRate) + ') прирост конкурса';
+      resAnnualYield.textContent = formatUsd(annualIncomeUsd) + ' / год';
+      resYieldPct.textContent = cData.yieldPct + '% net годовых в ' + cData.currency;
+
+      // Bars
+      const pRe = Math.round((reBudget / totalUsd) * 100);
+      const pBiz = Math.round((actualBizBudget / totalUsd) * 100);
+      const pRes = 100 - pRe - pBiz;
+
+      barRe.style.width = pRe + '%';
+      barBiz.style.width = pBiz + '%';
+      barReserve.style.width = pRes + '%';
+
+      txtBarRe.textContent = formatUsd(reBudget);
+      txtBarBiz.textContent = formatUsd(actualBizBudget);
+      txtBarRes.textContent = formatUsd(reserveBudget);
+    }
+
+    assetValRange.addEventListener('input', calculate);
+    targetCountrySel.addEventListener('change', calculate);
+    assetTypeSel.addEventListener('change', calculate);
+    chkBiz.addEventListener('change', calculate);
+    chkLogistics.addEventListener('change', calculate);
+
+    // Initial calc
+    calculate();
+
+    // Tab switching
+    const tabBtns = [
+      { btn: document.getElementById('tab-btn-calc'), pane: document.getElementById('pane-calc') },
+      { btn: document.getElementById('tab-btn-sim'), pane: document.getElementById('pane-sim') },
+      { btn: document.getElementById('tab-btn-prompt'), pane: document.getElementById('pane-prompt') },
+      { btn: document.getElementById('tab-btn-arch'), pane: document.getElementById('pane-arch') }
+    ];
+
+    tabBtns.forEach(item => {
+      item.btn.addEventListener('click', () => {
+        tabBtns.forEach(t => {
+          t.btn.classList.remove('active');
+          t.pane.classList.remove('active');
+        });
+        item.btn.classList.add('active');
+        item.pane.classList.add('active');
+      });
+    });
+
+    document.getElementById('btn-to-sim').addEventListener('click', () => {
+      tabBtns[1].btn.click();
+    });
+
+    // Chat Simulator logic
+    const chatBox = document.getElementById('chat-box');
+    const chatOptions = document.getElementById('chat-options');
+    const resetChatBtn = document.getElementById('btn-reset-chat');
+
+    let chatStep = 0;
+    let userChoices = {};
+
+    function addMessage(sender, text) {
+      const msg = document.createElement('div');
+      msg.classList.add('msg', sender === 'bot' ? 'msg-bot' : 'msg-user');
+      msg.innerHTML = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function renderOptions(options) {
+      chatOptions.innerHTML = '';
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.classList.add('quick-btn');
+        btn.textContent = opt.label;
+        btn.addEventListener('click', () => {
+          opt.action();
+        });
+        chatOptions.appendChild(btn);
+      });
+    }
+
+    function startChat() {
+      chatBox.innerHTML = '';
+      chatStep = 0;
+      userChoices = {};
+      
+      addMessage('bot', 'Здравствуйте! Я ИИ-стратег международного обмена недвижимостью (Москва/МО → Зарубежье).<br><br>Мы помогаем реализовать объект в Москве <b>конкурсным методом за 30 дней</b> по максимальной цене и бесшовно перевести капитал в готовые доходные активы, ВНЖ и бизнес.<br><br><b>Какой объект планируете реализовать?</b>');
+      
+      renderOptions([
+        { label: '🏢 Квартира в Москве (Бизнес / Премиум)', action: () => selectAsset('Квартира бизнес-класса в Москве') },
+        { label: '🏬 Коммерческое помещение / Ритейл', action: () => selectAsset('Коммерческое помещение в Москве') },
+        { label: '🏡 Загородный дом / Резиденция в МО', action: () => selectAsset('Загородный дом в МО') }
+      ]);
+    }
+
+    function selectAsset(asset) {
+      userChoices.asset = asset;
+      addMessage('user', asset);
+      setTimeout(() => {
+        addMessage('bot', 'Принято. Для точной модели конкурсного аукциона укажите примерный бюджетный ориентир:');
+        renderOptions([
+          { label: '💰 25 – 45 млн ₽ (~$270k - $500k)', action: () => selectBudget('35 млн ₽') },
+          { label: '💎 50 – 90 млн ₽ (~$550k - $1M)', action: () => selectBudget('70 млн ₽') },
+          { label: '👑 100+ млн ₽ ($1M+)', action: () => selectBudget('120 млн ₽') },
+          { label: '❓ А почему именно за 30 дней? Это не дешевле?', action: () => explainAuction() }
+        ]);
+      }, 400);
+    }
+
+    function explainAuction() {
+      addMessage('user', 'А почему именно за 30 дней? Это срочный выкуп с дисконтом?');
+      setTimeout(() => {
+        addMessage('bot', 'Ни в коем случае! <b>Конкурсный метод — это прямая противоположность дисконту.</b><br><br>При обычной продаже квартира висит месяцами, а торг идет вниз. Мы за 10 дней концентрируем масштабную рекламу, собираем 20-30 покупателей на один уикенд и устраиваем аукцион оферт на повышение. В 90% случаев это дает <b>+7–12% к рынку</b> и твердый задаток ровно к 30-му дню.<br><br>Какой бюджет вашего объекта закладываем?');
+        renderOptions([
+          { label: '💰 30 – 50 млн ₽', action: () => selectBudget('45 млн ₽') },
+          { label: '💎 50 – 100 млн ₽', action: () => selectBudget('75 млн ₽') },
+          { label: '👑 100+ млн ₽', action: () => selectBudget('120 млн ₽') }
+        ]);
+      }, 500);
+    }
+
+    function selectBudget(budget) {
+      userChoices.budget = budget;
+      addMessage('user', budget);
+      setTimeout(() => {
+        addMessage('bot', 'Отличная ликвидная категория. Теперь определим цель за рубежом. Что для вас в приоритете?');
+        renderOptions([
+          { label: '🇦🇪 ОАЭ (Дубай): Доходность 8-9% + Golden Visa', action: () => selectCountry('ОАЭ (Дубай)', '8-9%') },
+          { label: '🇮🇩 Бали: Виллы с арендной доходностью 11-14%', action: () => selectCountry('Бали (Индонезия)', '11-14%') },
+          { label: '🇪🇺 Кипр: ПМЖ Евросоюза для всей семьи', action: () => selectCountry('Кипр', '6.5% + ПМЖ ЕС') },
+          { label: '💼 Главное — открыть международный бизнес и счета', action: () => selectCountry('Бизнес-хаб (ОАЭ/Оман)', 'Компания + счет') }
+        ]);
+      }, 400);
+    }
+
+    function selectCountry(country, bonus) {
+      userChoices.country = country;
+      addMessage('user', country);
+      setTimeout(() => {
+        addMessage('bot', 'И последний ключевой вопрос: потребуется ли открытие юридического лица за рубежом (для торговой логистики, ВЭД или владения активами) и помощь с бесшовным переводом капитала?');
+        renderOptions([
+          { label: '✅ Да, нужна компания, счета и сопровождение под ключ', action: () => finishQual(true) },
+          { label: '🛡 Только покупка недвижимости и ВНЖ', action: () => finishQual(false) }
+        ]);
+      }, 400);
+    }
+
+    function finishQual(needBiz) {
+      userChoices.needBiz = needBiz;
+      addMessage('user', needBiz ? 'Да, нужна компания, счета и сопровождение под ключ' : 'Только покупка недвижимости и ВНЖ');
+      setTimeout(() => {
+        addMessage('bot', `🎯 <b>Предварительная модель вашего свопа сформирована!</b><br><br>
+        📊 <b>Продажа в Москве:</b> реализация за 30 дней с фиксацией пула покупателей (ориентир ${userChoices.budget}).<br>
+        🌍 <b>Активы за рубежом:</b> ${userChoices.country}.<br>
+        💼 <b>Юридический контур:</b> ${needBiz ? 'Регистрация компании + корпоративные счета + white-label логистика капитала под ключ.' : 'Прямое структурирование покупки и резидентские документы.'}<br><br>
+        Чтобы зафиксировать стартовую цену для запуска конкурса и получить <b>закрытый каталог инвестиционных лотов</b> со своп-скидкой до 5%, введите ваш номер телефона (WhatsApp / Telegram). Наш старший партнер по международным сделкам отправит драфт дорожной карты.`);
+        
+        chatOptions.innerHTML = `
+          <div style="display:flex; gap:8px; width:100%;">
+            <input type="text" id="phone-input" placeholder="+7 (999) 000-00-00" style="flex:1; background:#12192c; border:1px solid var(--accent-gold); color:#fff; padding:8px 12px; border-radius:8px; font-size:14px; outline:none;">
+            <button class="quick-btn" id="send-phone-btn" style="background:var(--accent-gold); color:#000; font-weight:700;">Получить стратегию</button>
+          </div>
+        `;
+        
+        document.getElementById('send-phone-btn').addEventListener('click', () => {
+          const ph = document.getElementById('phone-input').value.trim();
+          if (ph) {
+            addMessage('user', ph);
+            setTimeout(() => {
+              addMessage('bot', '✅ <b>Заявка успешно принята!</b> Карточка лида сформирована и передана ведущему брокеру в AmoCRM. Дорожная карта и пример расчета аукционного шага уже формируются для отправки в мессенджер.');
+              chatOptions.innerHTML = '<span style="font-size:13px; color:var(--accent-emerald);">● Лид квалифицирован и синхронизирован с CRM</span>';
+            }, 500);
+          }
+        });
+      }, 500);
+    }
+
+    resetChatBtn.addEventListener('click', startChat);
+    startChat();
+
+    // Copy Prompt Button
+    document.getElementById('copy-prompt-btn').addEventListener('click', () => {
+      const text = document.getElementById('prompt-content').innerText;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert('Системный промпт скопирован в буфер обмена!');
+        }).catch(() => {
+          fallbackCopy(text);
+        });
+      } else {
+        fallbackCopy(text);
+      }
+    });
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        alert('Системный промпт скопирован в буфер обмена!');
+      } catch (err) {
+        alert('Пожалуйста, выделите текст промпта и нажмите Ctrl+C');
+      }
+      document.body.removeChild(ta);
+    }
+  </script>
+</body>
+</html>
